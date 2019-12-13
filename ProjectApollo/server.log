@@ -1,0 +1,260 @@
+/home/ubuntu/pattern_classification
+Exception on /detectText [POST]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/dist-packages/flask/app.py", line 2446, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib/python3.6/dist-packages/flask/app.py", line 1951, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib/python3.6/dist-packages/flask/app.py", line 1820, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/usr/local/lib/python3.6/dist-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/usr/local/lib/python3.6/dist-packages/flask/app.py", line 1949, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python3.6/dist-packages/flask/app.py", line 1935, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "server1.py", line 200, in api_root
+    return_text, percent = image_classify(im)
+  File "server1.py", line 73, in image_classify
+    for currentLine in tf.gfile.GFile(RETRAINED_LABELS_TXT_FILE_LOC):
+AttributeError: module 'tensorflow' has no attribute 'gfile'
+/home/ubuntu/pattern_classification
+Exception on /detectText [POST]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/dist-packages/flask/app.py", line 2446, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib/python3.6/dist-packages/flask/app.py", line 1951, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib/python3.6/dist-packages/flask/app.py", line 1820, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/usr/local/lib/python3.6/dist-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/usr/local/lib/python3.6/dist-packages/flask/app.py", line 1949, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python3.6/dist-packages/flask/app.py", line 1935, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "server1.py", line 201, in api_root
+    return_text, percent = image_classify(im)
+  File "server1.py", line 74, in image_classify
+    for currentLine in tf.gfile.GFile(RETRAINED_LABELS_TXT_FILE_LOC):
+AttributeError: module 'tensorflow' has no attribute 'gfile'
+/home/ubuntu/pattern_classification
+Exception on /detectText [POST]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/dist-packages/flask/app.py", line 2446, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib/python3.6/dist-packages/flask/app.py", line 1951, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib/python3.6/dist-packages/flask/app.py", line 1820, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/usr/local/lib/python3.6/dist-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/usr/local/lib/python3.6/dist-packages/flask/app.py", line 1949, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python3.6/dist-packages/flask/app.py", line 1935, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "server1.py", line 201, in api_root
+    return_text, percent = image_classify(im)
+  File "server1.py", line 74, in image_classify
+    for currentLine in tf.gfile.GFile(RETRAINED_LABELS_TXT_FILE_LOC):
+AttributeError: module 'tensorflow' has no attribute 'gfile'
+/home/ubuntu/pattern_classification
+/home/ubuntu/pattern_classification
+/home/ubuntu/pattern_classification
+/home/ubuntu/pattern_classification
+/home/ubuntu/pattern_classification
+/home/ubuntu/pattern_classification
+/home/ubuntu/pattern_classification
+/home/ubuntu/pattern_classification
+Exception on /detectPattern [POST]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/dist-packages/tensorflow/python/client/session.py", line 1113, in _run
+    subfeed, allow_tensor=True, allow_operation=False)
+  File "/usr/local/lib/python3.6/dist-packages/tensorflow/python/framework/ops.py", line 3796, in as_graph_element
+    return self._as_graph_element_locked(obj, allow_tensor, allow_operation)
+  File "/usr/local/lib/python3.6/dist-packages/tensorflow/python/framework/ops.py", line 3838, in _as_graph_element_locked
+    "graph." % (repr(name), repr(op_name)))
+KeyError: "The name 'DecodeJpeg:0' refers to a Tensor which does not exist. The operation, 'DecodeJpeg', does not exist in the graph."
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/dist-packages/flask/app.py", line 2446, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib/python3.6/dist-packages/flask/app.py", line 1951, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib/python3.6/dist-packages/flask/app.py", line 1820, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/usr/local/lib/python3.6/dist-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/usr/local/lib/python3.6/dist-packages/flask/app.py", line 1949, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python3.6/dist-packages/flask/app.py", line 1935, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "server1.py", line 201, in api_root
+    return_text, percent = image_classify(im)
+  File "server1.py", line 125, in image_classify
+    predictions = sess.run(finalTensor, {'DecodeJpeg:0': tfImage})
+  File "/usr/local/lib/python3.6/dist-packages/tensorflow/python/client/session.py", line 950, in run
+    run_metadata_ptr)
+  File "/usr/local/lib/python3.6/dist-packages/tensorflow/python/client/session.py", line 1116, in _run
+    'Cannot interpret feed_dict key as Tensor: ' + e.args[0])
+TypeError: Cannot interpret feed_dict key as Tensor: The name 'DecodeJpeg:0' refers to a Tensor which does not exist. The operation, 'DecodeJpeg', does not exist in the graph.
+/home/ubuntu/pattern_classification
+Exception on /detectPattern [POST]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/dist-packages/tensorflow/python/client/session.py", line 1113, in _run
+    subfeed, allow_tensor=True, allow_operation=False)
+  File "/usr/local/lib/python3.6/dist-packages/tensorflow/python/framework/ops.py", line 3796, in as_graph_element
+    return self._as_graph_element_locked(obj, allow_tensor, allow_operation)
+  File "/usr/local/lib/python3.6/dist-packages/tensorflow/python/framework/ops.py", line 3838, in _as_graph_element_locked
+    "graph." % (repr(name), repr(op_name)))
+KeyError: "The name 'DecodeJpeg:0' refers to a Tensor which does not exist. The operation, 'DecodeJpeg', does not exist in the graph."
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/dist-packages/flask/app.py", line 2446, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib/python3.6/dist-packages/flask/app.py", line 1951, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib/python3.6/dist-packages/flask/app.py", line 1820, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/usr/local/lib/python3.6/dist-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/usr/local/lib/python3.6/dist-packages/flask/app.py", line 1949, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python3.6/dist-packages/flask/app.py", line 1935, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "server1.py", line 201, in api_root
+    return_text, percent = image_classify(im)
+  File "server1.py", line 125, in image_classify
+    predictions = sess.run(finalTensor, {'DecodeJpeg:0': tfImage})
+  File "/usr/local/lib/python3.6/dist-packages/tensorflow/python/client/session.py", line 950, in run
+    run_metadata_ptr)
+  File "/usr/local/lib/python3.6/dist-packages/tensorflow/python/client/session.py", line 1116, in _run
+    'Cannot interpret feed_dict key as Tensor: ' + e.args[0])
+TypeError: Cannot interpret feed_dict key as Tensor: The name 'DecodeJpeg:0' refers to a Tensor which does not exist. The operation, 'DecodeJpeg', does not exist in the graph.
+/home/ubuntu/pattern_classification
+Exception on /detectPattern [POST]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/dist-packages/tensorflow/python/client/session.py", line 1113, in _run
+    subfeed, allow_tensor=True, allow_operation=False)
+  File "/usr/local/lib/python3.6/dist-packages/tensorflow/python/framework/ops.py", line 3796, in as_graph_element
+    return self._as_graph_element_locked(obj, allow_tensor, allow_operation)
+  File "/usr/local/lib/python3.6/dist-packages/tensorflow/python/framework/ops.py", line 3838, in _as_graph_element_locked
+    "graph." % (repr(name), repr(op_name)))
+KeyError: "The name 'DecodeJpeg:0' refers to a Tensor which does not exist. The operation, 'DecodeJpeg', does not exist in the graph."
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/dist-packages/flask/app.py", line 2446, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib/python3.6/dist-packages/flask/app.py", line 1951, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib/python3.6/dist-packages/flask/app.py", line 1820, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/usr/local/lib/python3.6/dist-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/usr/local/lib/python3.6/dist-packages/flask/app.py", line 1949, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python3.6/dist-packages/flask/app.py", line 1935, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "server1.py", line 201, in api_root
+    return_text, percent = image_classify(im)
+  File "server1.py", line 125, in image_classify
+    predictions = sess.run(finalTensor, {'DecodeJpeg:0': tfImage})
+  File "/usr/local/lib/python3.6/dist-packages/tensorflow/python/client/session.py", line 950, in run
+    run_metadata_ptr)
+  File "/usr/local/lib/python3.6/dist-packages/tensorflow/python/client/session.py", line 1116, in _run
+    'Cannot interpret feed_dict key as Tensor: ' + e.args[0])
+TypeError: Cannot interpret feed_dict key as Tensor: The name 'DecodeJpeg:0' refers to a Tensor which does not exist. The operation, 'DecodeJpeg', does not exist in the graph.
+/home/ubuntu/pattern_classification
+/home/ubuntu/pattern_classification
+/home/ubuntu/pattern_classification
+/home/ubuntu/pattern_classification
+/home/ubuntu/pattern_classification
+/home/ubuntu/pattern_classification
+/home/ubuntu/pattern_classification
+/home/ubuntu/pattern_classification
+/home/ubuntu/pattern_classification
+/home/ubuntu/pattern_classification
+Exception on /detectPattern [POST]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/dist-packages/tensorflow/python/client/session.py", line 1113, in _run
+    subfeed, allow_tensor=True, allow_operation=False)
+  File "/usr/local/lib/python3.6/dist-packages/tensorflow/python/framework/ops.py", line 3796, in as_graph_element
+    return self._as_graph_element_locked(obj, allow_tensor, allow_operation)
+  File "/usr/local/lib/python3.6/dist-packages/tensorflow/python/framework/ops.py", line 3838, in _as_graph_element_locked
+    "graph." % (repr(name), repr(op_name)))
+KeyError: "The name 'DecodeJpeg:0' refers to a Tensor which does not exist. The operation, 'DecodeJpeg', does not exist in the graph."
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/dist-packages/flask/app.py", line 2446, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib/python3.6/dist-packages/flask/app.py", line 1951, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib/python3.6/dist-packages/flask/app.py", line 1820, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/usr/local/lib/python3.6/dist-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/usr/local/lib/python3.6/dist-packages/flask/app.py", line 1949, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python3.6/dist-packages/flask/app.py", line 1935, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "server1.py", line 201, in api_root
+    return_text, percent = image_classify(im)
+  File "server1.py", line 125, in image_classify
+    predictions = sess.run(finalTensor, {'DecodeJpeg:0': tfImage})
+  File "/usr/local/lib/python3.6/dist-packages/tensorflow/python/client/session.py", line 950, in run
+    run_metadata_ptr)
+  File "/usr/local/lib/python3.6/dist-packages/tensorflow/python/client/session.py", line 1116, in _run
+    'Cannot interpret feed_dict key as Tensor: ' + e.args[0])
+TypeError: Cannot interpret feed_dict key as Tensor: The name 'DecodeJpeg:0' refers to a Tensor which does not exist. The operation, 'DecodeJpeg', does not exist in the graph.
+/home/ubuntu/pattern_classification
+/home/ubuntu/pattern_classification
+/home/ubuntu/pattern_classification
+/home/ubuntu/pattern_classification
+/home/ubuntu/pattern_classification
+/home/ubuntu/pattern_classification
+/home/ubuntu/pattern_classification
+/home/ubuntu/pattern_classification
+/home/ubuntu/pattern_classification
+/home/swati/Desktop/pattern_classification
+D:\pattern_classification\pattern_classification
+D:\pattern_classification\pattern_classification
+D:\RIYA\pattern_classification\pattern_classification
+D:\RIYA\pattern_classification\pattern_classification
+D:\RIYA\pattern_classification\pattern_classification
+D:\RIYA\pattern_classification\pattern_classification
+D:\RIYA\pattern_classification\pattern_classification
+D:\RIYA\pattern_classification\pattern_classification
+D:\RIYA\pattern_classification\pattern_classification
+D:\RIYA\pattern_classification\pattern_classification
+D:\RIYA\pattern_classification\pattern_classification
+D:\RIYA\pattern_classification\pattern_classification
+D:\RIYA\pattern_classification\pattern_classification
+D:\RIYA\pattern_classification\pattern_classification
+D:\RIYA\pattern_classification\pattern_classification
+D:\RIYA\pattern_classification\pattern_classification
+D:\RIYA\pattern_classification\pattern_classification
+D:\RIYA\pattern_classification\pattern_classification
+D:\RIYA\pattern_classification\pattern_classification
+D:\RIYA\pattern_classification\pattern_classification
+D:\RIYA\pattern_classification\pattern_classification
+D:\RIYA\pattern_classification\pattern_classification
+D:\RIYA\pattern_classification\pattern_classification
+D:\RIYA\pattern_classification\pattern_classification
+D:\RIYA\pattern_classification\pattern_classification
+D:\RIYA\pattern_classification\pattern_classification
+D:\RIYA\pattern_classification\pattern_classification
+D:\RIYA\pattern_classification\pattern_classification
+D:\RIYA\pattern_classification\pattern_classification
+D:\RIYA\pattern_classification\pattern_classification
+D:\RIYA\pattern_classification\pattern_classification
+D:\RIYA\pattern_classification\pattern_classification
+D:\RIYA\pattern_classification\pattern_classification
+D:\RIYA\pattern_classification\pattern_classification
