@@ -29,8 +29,8 @@ app.config['UPLOAD_IMG_FOLDER'] = UPLOAD_IMG_FOLDER
 app.config['UPLOAD_ORG_FOLDER'] = UPLOAD_ORG_FOLDER
 app.config['UPLOAD_PREP_FOLDER'] = UPLOAD_PREP_FOLDER
 # module-level variables ##############################################################################################
-RETRAINED_LABELS_TXT_FILE_LOC = os.getcwd() + "/" + "output_labels.txt"
-RETRAINED_GRAPH_PB_FILE_LOC = os.getcwd() + "/" + "output_graph.pb"
+RETRAINED_LABELS_TXT_FILE_LOC = os.getcwd() + "/" + "retrained_labels.txt"
+RETRAINED_GRAPH_PB_FILE_LOC = os.getcwd() + "/" + "retrained_graph.pb"
 
 TEST_IMAGES_DIR = '/home/swati/Desktop/Development_3/new_dataset/test/'
 
@@ -399,10 +399,10 @@ def api_root2():
         # Directory to save logs and trained model
         MODEL_DIR = os.path.join(ROOT_DIR, "logs")
 
-        custom_WEIGHTS_PATH = r"D:\RIYA\pattern_classification\pattern_classification\logs\mask_rcnn_damage_0010.h5"  # TODO: update this path
+        custom_WEIGHTS_PATH = r"/home/ML/model/ProjectApollo/mask_rcnn_damage_0010.h5"  # TODO: update this path
 
         config = custom.CustomConfig()
-        custom_DIR = r"D:\RIYA\pattern_classification\pattern_classification\dataset"
+        custom_DIR = r"/home/ML/model/ProjectApollo/dataset"
 
         # Override the training configurations with a few
         # changes for inferencing.
