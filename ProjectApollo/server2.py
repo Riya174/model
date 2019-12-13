@@ -248,11 +248,11 @@ def load_model(configpath, weightspath):
     return net
 
 
-def image_to_byte_array(image: Image):
-    imgByteArr = io.BytesIO()
-    image.save(imgByteArr, format='PNG')
-    imgByteArr = imgByteArr.getvalue()
-    return imgByteArr
+# def image_to_byte_array(image: Image):
+#     imgByteArr = io.BytesIO()
+#     image.save(imgByteArr, format='PNG')
+#     imgByteArr = imgByteArr.getvalue()
+#     return imgByteArr
 
 
 def get_predection(image, net, LABELS, COLORS):
