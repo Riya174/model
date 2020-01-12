@@ -1,0 +1,12 @@
+{
+   "instance_dir" : {
+      "created_at" : 1573018929,
+      "major_version" : 4,
+      "minor_version" : 0
+   },
+   "integration_mode" : "apache",
+   "name" : "Qhqu9HEH",
+   "passenger_version" : "5.1.2",
+   "server_software" : "Apache/2.4.39 (Unix) OpenSSL/1.0.2r SVN/1.11.1 PHP/7.2.17 Phusion_Passenger/5.1.2",
+   "watchdog_pid" : 7299
+}
