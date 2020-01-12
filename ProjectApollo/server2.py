@@ -1,17 +1,23 @@
-from flask import Flask, request, Response
-import logging, os
-import json
-import io, os, shutil, time, random
-from PIL import Image
-import tensorflow as tf
-import numpy as np
-import cv2
 import base64
+import io
+import json
+import logging
+import os
 import sys
-import matplotlib.pyplot as plt
-#from werkzeug import secure_filename
+import time
 
+import Code
+import cv2
+import matplotlib.pyplot as plt
+import numpy as np
+import tensorflow as tf
+from PIL import Image
+from flask import Flask, request, Response
 # count=0
+from werkzeug.utils import secure_filename
+
+# from werkzeug import secure_filename
+
 app = Flask(__name__,)
 file_handler = logging.FileHandler('server.log')
 app.logger.addHandler(file_handler)
@@ -129,7 +135,7 @@ def image_classify(fileName):
         tfImage = np.array(openCVImage)[:, :, 0:3]
 
         # run the network to get the predictions
-        predictions = sess.run(finalTensor, {'DecodeJPGInput:0': tfImage})
+        predictions = sess.run(finalTensor, {'DecodeJpeg:0': tfImage})
 
         # sort predictions from most confidence to least confidence
         sortedPredictions = predictions[0].argsort()[-len(predictions[0]):][::-1]
@@ -248,11 +254,11 @@ def load_model(configpath, weightspath):
     return net
 
 
-# def image_to_byte_array(image: Image):
-#     imgByteArr = io.BytesIO()
-#     image.save(imgByteArr, format='PNG')
-#     imgByteArr = imgByteArr.getvalue()
-#     return imgByteArr
+def image_to_byte_array(image: Image):
+    imgByteArr = io.BytesIO()
+    image.save(imgByteArr, format='PNG')
+    imgByteArr = imgByteArr.getvalue()
+    return imgByteArr
 
 
 def get_predection(image, net, LABELS, COLORS):
@@ -390,7 +396,6 @@ def api_root2():
         sys.path.append(ROOT_DIR)  # To find local version of the library
         from mrcnn import utils
         from mrcnn import visualize
-        from mrcnn.visualize import display_images
         import mrcnn.model as modellib
         from mrcnn.model import log
 
@@ -399,10 +404,10 @@ def api_root2():
         # Directory to save logs and trained model
         MODEL_DIR = os.path.join(ROOT_DIR, "logs")
 
-        custom_WEIGHTS_PATH = r"/home/ML/model/ProjectApollo/mask_rcnn_damage_0010.h5"  # TODO: update this path
+        custom_WEIGHTS_PATH = r"D:\RIYA\pattern_classification\pattern_classification\logs\mask_rcnn_damage_0010.h5"  # TODO: update this path
 
         config = custom.CustomConfig()
-        custom_DIR = r"/home/ML/model/ProjectApollo/dataset"
+        custom_DIR = r"D:\RIYA\pattern_classification\pattern_classification\dataset"
 
         # Override the training configurations with a few
         # changes for inferencing.
@@ -457,8 +462,7 @@ def api_root2():
 
         model.load_weights(custom_WEIGHTS_PATH, by_name=True)
 
-        from importlib import \
-            reload  # was constantly changin the visualization, so I decided to reload it instead of notebook
+        from importlib import reload  # was constantly changin the visualization, so I decided to reload it instead of notebook
         reload(visualize)
 
         #import argparse
@@ -503,7 +507,182 @@ def api_root2():
 
         return Response(response=json.dumps(data), status=200, mimetype='application/json')
 
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+def create_new_folder(local_dir):
+    if not os.path.exists(local_dir):
+        os.makedirs(local_dir)
+    return local_dir
+@app.route('/detectText', methods = ['POST'])
+def api_root4():
+    app.logger.info(PROJECT_HOME)
+    app.logger.info(UPLOAD_FOLDER)
+    if request.method == 'POST' and request.files['image']:
+
+        data = request.files.to_dict()
+        inner_data = data['image']
+        format = str(inner_data)
+        i = format.find('image/jpeg')
+        j = format.find('image/png')
+        img = request.files['image'].read()
+        size = len(img)
+        cpt = sum([len(files) for r, d, files in os.walk(UPLOAD_FOLDER)])
+        count = cpt + 1
+
+        #if i != -1 or j != -1:
+        #if size <= 1048576:
+        img = request.files['image']
+        original_img = Image.open(img)
+        # resized_img = original_img.resize((320, 320))
+        img_name = secure_filename(img.filename)
+        #print("image name:", img_name)
+        #output = ocr_core(img_name)
+        sub = img_name.rfind('.')
+        length = len(img_name)
+        substr = img_name[sub:length]
+
+
+        create_new_folder(app.config['UPLOAD_FOLDER'])
+        count = cpt + 1
+        saved_path = os.path.join(app.config['UPLOAD_FOLDER'], str(count) + substr)
+
+        app.logger.info("saving {}".format(saved_path))
+        original_img.save(saved_path)
+        #print(saved_path)
+        recognised_text = Code.MainFunction(saved_path)
+        if "M" in recognised_text and len(recognised_text.split("MR", 1)) >1:
+            recognised_text = 'MR'+ recognised_text.split('MR', 1)[1]
+            recognised_text = recognised_text[0:17]
+        if "B" in recognised_text and len(recognised_text.split("BL", 1)) >1:
+            recognised_text = 'BL'+ recognised_text.split('BL', 1)[1]
+            recognised_text = recognised_text[0:17]
+
+        if len(recognised_text) > 17: recognised_text = recognised_text[:-1]
+        if len(recognised_text) < 15 or  '-' in recognised_text: recognised_text = recognised_text[1:11]
+        if(recognised_text[9] in ['h', '1']):
+            recognised_text.replace(recognised_text[9], 'l')
+        recognised_text = recognised_text.upper()
+        print(recognised_text)
+        #if(recognised_text[9] in ['h', '1']):
+        #    recognised_text.replace(recognised_text[9], 'l')
+        if recognised_text is not None and len(recognised_text) > 0 :
+            return Response(json.dumps({"predicted_text": recognised_text}), mimetype='application/json')
+        else:   return Response(json.dumps({"predicted_text":recognised_text}), mimetype='application/json')
+            #else:
+            #    return Response(json.dumps({"predicted_text": "Size should not be greater than 1 mb"}),mimetype='application/json')
+        #else:
+        #    return Response(json.dumps({"predicted_text": "Size should not be greater than 1 mb"}), mimetype='application/json')
+    else:
+        return Response(json.dumps({"predicted_text": "Where is the image?"}),mimetype='application/json')
+
+@app.route('/detectDamage', methods = ['POST'])
+def api_root3():
+    app.logger.info(PROJECT_HOME)
+    if request.method=='POST' and request.files['image']:
+        ROOT_DIR = os.getcwd()
+
+        # Import Mask RCNN
+        sys.path.append(ROOT_DIR)  # To find local version of the library
+        from mrcnn import utils
+        from mrcnn import visualize_car
+        from mrcnn.visualize import display_images
+        import mrcnn.model as modellib
+        from mrcnn.model import log
+
+        import custom_car
+
+        # Directory to save logs and trained model
+        MODEL_DIR = os.path.join(ROOT_DIR, "logs")
+
+        custom_WEIGHTS_PATH = r"D:\RIYA\pattern_classification\pattern_classification\logs\mask_rcnn_damage_0020.h5"  # TODO: update this path
+
+        config = custom_car.CustomConfig()
+        custom_DIR = r"D:\RIYA\pattern_classification\pattern_classification\dataset_dir"
+
+        # Override the training configurations with a few
+        # changes for inferencing.
+        class InferenceConfig(config.__class__):
+            # Run detection on one image at a time
+            GPU_COUNT = 1
+            IMAGES_PER_GPU = 1
+
+        config = InferenceConfig()
+        # config.display()
+
+        # Device to load the neural network on.
+        # Useful if you're training a model on the same
+        # machine, in which case use CPU and leave the
+        # GPU for training.
+        DEVICE = "/cpu:0"  # /cpu:0 or /gpu:0
+
+        # Inspect the model in training or inference modes
+        # values: 'inference' or 'training'
+        # TODO: code for 'training' test mode not ready yet
+        TEST_MODE = "inference"
+
+        def get_ax(rows=1, cols=1, size=16):
+            """Return a Matplotlib Axes array to be used in
+            all visualizations in the notebook. Provide a
+            central point to control graph sizes.
+
+            Adjust the size attribute to control how big to render images
+            """
+            _, ax = plt.subplots(rows, cols, figsize=(size * cols, size * rows))
+            return ax
+
+        # Load validation dataset
+        # dataset = custom_car.CustomDataset()
+        # dataset.load_custom(custom_DIR, "val")
+
+        # Must call before using the dataset
+        #dataset.prepare()
+
+
+
+        # Create model in inference mode
+        with tf.device(DEVICE):
+            model = modellib.MaskRCNN(mode="inference", model_dir=MODEL_DIR,
+                                      config=config)
+
+        # load the last model you trained
+        # weights_path = model.find_last()[1]
+
+        # Load weights
+        print("Loading weights ", custom_WEIGHTS_PATH)
+        model.load_weights(custom_WEIGHTS_PATH, by_name=True)
+
+        from importlib import reload  # was constantly changin the visualization, so I decided to reload it instead of notebook
+        reload(visualize_car)
+
+        # image_id = random.choice(dataset.image_ids)
+        # image, image_meta, gt_class_id, gt_bbox, gt_mask = \
+        #     modellib.load_image_gt(dataset, config, image_id, use_mini_mask=False)
+        # info = dataset.image_info[image_id]
+        # print("image ID: {}.{} ({}) {}".format(info["source"], info["id"], image_id,
+        #                                        dataset.image_reference(image_id)))
+        image1 = request.files['image'].read()
+        image2 = Image.open(io.BytesIO(image1))
+
+        # Run object detection
+        image = np.array(image2)
+        results = model.detect([image], verbose=1)
+
+        # Display results
+        ax = get_ax(1)
+        r = results[0]
+        capt = visualize_car.display_instances(image, r['rois'], r['masks'], r['class_ids'],
+                                    ['BG', 'damage'], r['scores'], ax=ax,
+                                    title="Predictions")
+
+        data={}
+        with open("image2.jpg", mode='rb') as file:
+            img = file.read()
+        data['img'] = base64.encodebytes(img).decode("utf-8")
+        data['cap'] = capt
+
+        return Response(response=json.dumps(data), status=200, mimetype='application/json')
+
 
 
 if __name__ == '__main__':
-    app.run(host='172.28.135.45', debug=True, threaded=False)
+    app.run(host='0.0.0.0',debug=True)
