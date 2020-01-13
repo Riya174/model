@@ -404,10 +404,10 @@ def api_root2():
         # Directory to save logs and trained model
         MODEL_DIR = os.path.join(ROOT_DIR, "logs")
 
-        custom_WEIGHTS_PATH = r"D:\RIYA\pattern_classification\pattern_classification\logs\mask_rcnn_damage_0010.h5"  # TODO: update this path
+        custom_WEIGHTS_PATH = os.path.join(MODEL_DIR, "mask_rcnn_damage_0050.h5")  # TODO: update this path
 
         config = custom.CustomConfig()
-        custom_DIR = r"D:\RIYA\pattern_classification\pattern_classification\dataset"
+        #custom_DIR = r"D:\RIYA\pattern_classification\pattern_classification\dataset"
 
         # Override the training configurations with a few
         # changes for inferencing.
@@ -594,10 +594,10 @@ def api_root3():
         # Directory to save logs and trained model
         MODEL_DIR = os.path.join(ROOT_DIR, "logs")
 
-        custom_WEIGHTS_PATH = r"D:\RIYA\pattern_classification\pattern_classification\logs\mask_rcnn_damage_0020.h5"  # TODO: update this path
+        custom_WEIGHTS_PATH = os.path.join(MODEL_DIR, "mask_rcnn_damage_0020.h5")  # TODO: update this path
 
         config = custom_car.CustomConfig()
-        custom_DIR = r"D:\RIYA\pattern_classification\pattern_classification\dataset_dir"
+        #custom_DIR = r"D:\RIYA\pattern_classification\pattern_classification\dataset_dir"
 
         # Override the training configurations with a few
         # changes for inferencing.
