@@ -495,7 +495,7 @@ def api_root2():
         r = results[0]
 
         capt = visualize.display_instances(image, r['rois'], r['masks'], r['class_ids'],
-                                           ['BG', 'deflation_damage', 'side_through_cut', 'impact_bulge'], r['scores'],
+                                           ['BG', 'deflation_damage', 'side_through_cut', 'impact_bulge', 'runflat'], r['scores'],
                                            ax=ax,
                                            title="Predictions")
 
