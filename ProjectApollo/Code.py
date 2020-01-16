@@ -36,10 +36,10 @@ def predictionLabel(i, save_path, image_name):
     Name = str(i) + '.jpg'
     Name = image_name + '-' + Name
     fullPath = os.path.join(save_path, image_name, 'Characters', Name)
-
+    ROOT_DIR = os.getcwd()
     prediction = label_image.predict_label(fullPath,
-                                           "D:\RIYA\pattern_classification\pattern_classification\digit_output_graph.pb",
-                                           "D:\RIYA\pattern_classification\pattern_classification\digit_output_labels",
+                                           os.path.join(ROOT_DIR,"digit_output_graph.pb"),
+                                           os.path.join(ROOT_DIR,"digit_output_labels"),
                                           0, 0, 0, 0, "Placeholder", "final_result")
     print("prediction ", prediction)
     return prediction
